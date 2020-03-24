@@ -1,5 +1,6 @@
 class YoutubeTag < LiquidTagBase
   PARTIAL = "liquids/youtube".freeze
+
   #  Above is where I was able to find the partial being set to the liquids/youtube file path,
   # which is where the actual <iframe> element is being built. By finding this, it gave us a good
   # start on how to correctly render the video on the screen.

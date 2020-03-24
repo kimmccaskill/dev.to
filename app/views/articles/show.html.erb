@@ -206,24 +206,28 @@ Location of title in html is line 127 -->
 Somewhere below...I believe is a "classic dev post" followed by "another post you might like"
 Depending on where we decide to put these videos would be either right here at the top or maybe below the suggested_articles -->
 
-  <% cache("article-bottom-content-#{@article.id}", expires_in: 18.hours) do %>
-    <% @classic_article = Suggester::Articles::Classic.new(@article, not_ids: [@article.id]).get.first %>
-  <%# Starting below, the first 3 <div>s are all created so that we can reuse code in regards to styling that matches
+  <%# ** STARTING AT LINE 225 **
+  Starting below, the first 3 <div>s are all created so that we can reuse code in regards to styling that matches
   and is already being used within the code base. Kim had mentioned how this isn't how he would have structured the code with
   3 nested <div>s, but that he was able to reuse code by doing so. I had mentioned that I think it shows more of his ability
   to keep the nested <div>s like they are becuase it shows he was able to recognize the styling would have been the same. I
   also brought up that in a real world setting, that might be something to point out to a PM about in the future refactoring
   so that the code looks a little cleaner. %>
+
+  <%# **SATARTING AT LINE 232 **
+  The <div> below is new code that was added to implement our youtube videos onto the webpage. The class of youtube-videos
+  is new code that was written to implement cleaner styling for the elements, primarily just padding/margins to center the
+  videos. We tracked down the liquids/youtube partial and saw that was where we were building out the
+  actual <iframe> element for the videos to display on the page. Kim also found out that we needed a set
+  width and height otherwise the videos were rendering very very small. Our goal is to now work on breaking out
+  this code below into it's own partial (i believe that's the correct term) so that we have DRY code here. %>
+
+  <% cache("article-bottom-content-#{@article.id}", expires_in: 18.hours) do %>
+    <% @classic_article = Suggester::Articles::Classic.new(@article, not_ids: [@article.id]).get.first %>
     <div class="container show-page-content-display">
       <div class="content-classification">
         <div class="content-classification-text">Some Videos You Might Like</div>
       </div>
-      <%# The <div> below is new code that was added to implement our youtube videos onto the webpage. The class of youtube-videos
-      is new code that was written to implement cleaner styling for the elements, primarily just padding/margins to center the
-      videos. We tracked down the liquids/youtube partial and saw that was where we were building out the
-      actual <iframe> element for the videos to display on the page. Kim also found out that we needed a set
-      width and height otherwise the videos were rendering very very small. Our goal is to now work on breaking out
-      this code below into it's own partial (i believe that's the correct term) so that we have DRY code here. %>
       <div class="youtube-videos">
         <%= render "liquids/youtube", id: "rvfmPtkhqok", width: 766, height: 431 %>
         <%= render "liquids/youtube", id: "-Mkp4oavz2M", width: 766, height: 431 %>
