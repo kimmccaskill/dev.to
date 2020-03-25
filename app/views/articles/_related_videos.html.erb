@@ -1,0 +1,16 @@
+<div class="youtube-videos">
+  <%= render "liquids/youtube", id: "rvfmPtkhqok", width: 766, height: 431 %>
+  <%= render "liquids/youtube", id: "-Mkp4oavz2M", width: 766, height: 431 %>
+  <%= render "liquids/youtube", id: "0Atk61qbLT0", width: 766, height: 431 %>
+</div>
+<script>
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    }
+  }
+  fetch(`http://localhost:3000/relevant_content?keywords=westworld`)
+    .then(res => res.json())
+    .then(data => console.log(data))
+</script>

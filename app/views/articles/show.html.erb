@@ -212,20 +212,7 @@ Depending on where we decide to put these videos would be either right here at t
       <div class="content-classification">
         <div class="content-classification-text">Some Videos You Might Like</div>
       </div>
-      <div class="youtube-videos">
-        <%= render "liquids/youtube", 
-          id: "rvfmPtkhqok",
-          width: 766,
-          height: 431 %>
-        <%= render "liquids/youtube", 
-          id: "-Mkp4oavz2M",
-          width: 766,
-          height: 431 %>
-        <%= render "liquids/youtube", 
-          id: "0Atk61qbLT0",
-          width: 766,
-          height: 431 %>
-      </div>
+      <%= render "articles/related_videos" %>
     </div>
     <% if @classic_article %>
       <%= render "additional_content_boxes/article_box",

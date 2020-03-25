@@ -1,5 +1,5 @@
 class RelevantContentController < ApplicationController
-  def create
+  def index
     content = RelevantContentFacade.new(params[:keywords])
     render json: RelevantContentSerializer.new(content)
   end

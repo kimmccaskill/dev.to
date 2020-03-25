@@ -25,7 +25,7 @@ Rails.application.routes.draw do
     get "/enter" => "registrations#new", :as => :sign_up
   end
 
-  post "/relevant_content" => "relevant_content#create"
+  get "/relevant_content" => "relevant_content#index"
 
   namespace :admin do
     # Check administrate gem docs
