@@ -2,73 +2,85 @@
 </div>
 
 <script>
-  let randomNumber1, randomNumber2, randomNumber3
-  const videoContainer = document.querySelector('.youtube-videos')
+  // let randomNumber1, randomNumber2, randomNumber3;
 
-  const data = {
-    data: {
-      id: null,
-      type: "relevant_content",
-      attributes: {
-        videos: [
-          {
-              id: "10WnvBk9sZc"
-          },
-          {
-              id: "oxoFVqetl1E"
-          },
-          {
-              id: "iyC-jQKz_1A"
-          },
-          {
-              id: "2KWd-5YHfiw"
-          },
-          {
-              id: "8SS2iOf-UgM"
-          },
-          {
-              id: "gYtvx_ay1Rw"
-          },
-          {
-              id: "3_yFOSPDrgY"
-          },
-          {
-              id: "fzG0Yxy0cZs"
-          },
-          {
-              id: "4emnBuT3vwQ"
-          },
-          {
-              id: "GfCC7u9kNC8"
-          }
-        ]
+  // const data = {
+  //   data: {
+  //     id: null,
+  //     type: "relevant_content",
+  //     attributes: {
+  //       videos: [
+  //         {
+  //             id: "10WnvBk9sZc"
+  //         },
+  //         {
+  //             id: "oxoFVqetl1E"
+  //         },
+  //         {
+  //             id: "iyC-jQKz_1A"
+  //         },
+  //         {
+  //             id: "2KWd-5YHfiw"
+  //         },
+  //         {
+  //             id: "8SS2iOf-UgM"
+  //         },
+  //         {
+  //             id: "gYtvx_ay1Rw"
+  //         },
+  //         {
+  //             id: "3_yFOSPDrgY"
+  //         },
+  //         {
+  //             id: "fzG0Yxy0cZs"
+  //         },
+  //         {
+  //             id: "4emnBuT3vwQ"
+  //         },
+  //         {
+  //             id: "GfCC7u9kNC8"
+  //         }
+  //       ]
+  //     }
+  //   }
+  // }
+
+  const findRandomIDs = (data) => {
+    let videoContainer = document.querySelector('.youtube-videos')
+    let IDs = data.data.attributes.videos
+    let max = IDs.length
+    if (max === 0) {
+      return videoContainer.innerHTML = `
+      <h2>Looks like we found no related videos. Sorry!!</h2>
+      `
+    }
+    if (max <= 3) {
+      return IDs.map(video => {
+        let videoID = video.id;
+        videoContainer.innerHTML += `
+              <%= render "liquids/youtube", id: "${videoID}", width: 766, height: 431 %>
+        `
+      })
+    } else {
+      let randomNums = [Math.floor(Math.random() * (max)), Math.floor(Math.random() * (max)), Math.floor(Math.random() * (max))]
+      if (randomNums[0] === randomNums[1] || randomNums[1] === randomNums[2] || randomNums[2] === randomNums[0]) {
+        findRandomIDs()
+      } else {
+        return (
+          randomNums.map(number => {
+            let videoID = IDs[number].id
+            videoContainer.innerHTML += `
+              <%= render "liquids/youtube", id: "${videoID}", width: 766, height: 431 %>
+            `
+          })
+        )
       }
     }
   }
 
-  const findRandomIDs = () => {
-    let IDs = data.data.attributes.videos
-    let max = IDs.length
-    
-    let randomNums = [Math.floor(Math.random() * (max)), Math.floor(Math.random() * (max)), Math.floor(Math.random() * (max))]
-    if (randomNums[0] === randomNums[1] || randomNums[1] === randomNums[2] || randomNums[2] === randomNums[0]) {
-      findRandomIDs()
-    } else {
-      return (
-        randomNums.map(number => {
-          let videoID = IDs[number].id
-          videoContainer.innerHTML += `
-            <%= render "liquids/youtube", id: "${videoID}", width: 766, height: 431 %>
-          `
-        })
-      )
-    }
-  }
-  findRandomIDs()
-
-  // const title = "<%=@article.title %>"
-  // // const keywords = '%20westworld%20robots'
-  // fetch(`http://localhost:3000/relevant_content?keywords=${title}`)
-  //   .then(res => res.json())
-  //   .then(data => console.log(data.data.attributes.videos))
+  let title = "<%= @article.title %>"
+  // const keywords = '%20westworld%20robots'
+  fetch(`http://localhost:3000/relevant_content?keywords=${title}`)
+    .then(res => res.json())
+    .then(data => findRandomIDs(data))
 </script>
