@@ -2,51 +2,51 @@
 </div>
 
 <script>
-  let randomNumber1, randomNumber2, randomNumber3
-  const videoContainer = document.querySelector('.youtube-videos')
+  // let randomNumber1, randomNumber2, randomNumber3;
 
-  const data = {
-    data: {
-      id: null,
-      type: "relevant_content",
-      attributes: {
-        videos: [
-          {
-              id: "10WnvBk9sZc"
-          },
-          {
-              id: "oxoFVqetl1E"
-          },
-          {
-              id: "iyC-jQKz_1A"
-          },
-          {
-              id: "2KWd-5YHfiw"
-          },
-          {
-              id: "8SS2iOf-UgM"
-          },
-          {
-              id: "gYtvx_ay1Rw"
-          },
-          {
-              id: "3_yFOSPDrgY"
-          },
-          {
-              id: "fzG0Yxy0cZs"
-          },
-          {
-              id: "4emnBuT3vwQ"
-          },
-          {
-              id: "GfCC7u9kNC8"
-          }
-        ]
-      }
-    }
-  }
+  // const data = {
+  //   data: {
+  //     id: null,
+  //     type: "relevant_content",
+  //     attributes: {
+  //       videos: [
+  //         {
+  //             id: "10WnvBk9sZc"
+  //         },
+  //         {
+  //             id: "oxoFVqetl1E"
+  //         },
+  //         {
+  //             id: "iyC-jQKz_1A"
+  //         },
+  //         {
+  //             id: "2KWd-5YHfiw"
+  //         },
+  //         {
+  //             id: "8SS2iOf-UgM"
+  //         },
+  //         {
+  //             id: "gYtvx_ay1Rw"
+  //         },
+  //         {
+  //             id: "3_yFOSPDrgY"
+  //         },
+  //         {
+  //             id: "fzG0Yxy0cZs"
+  //         },
+  //         {
+  //             id: "4emnBuT3vwQ"
+  //         },
+  //         {
+  //             id: "GfCC7u9kNC8"
+  //         }
+  //       ]
+  //     }
+  //   }
+  // }
 
-  const findRandomIDs = () => {
+  const findRandomIDs = (data) => {
+    let videoContainer = document.querySelector('.youtube-videos')
     let IDs = data.data.attributes.videos
     let max = IDs.length
     if (max === 0) {
@@ -77,11 +77,10 @@
       }
     }
   }
-  findRandomIDs()
 
-  // const title = "<%= @article.title %>"
-  // // const keywords = '%20westworld%20robots'
-  // fetch(`http://localhost:3000/relevant_content?keywords=${title}`)
-  //   .then(res => res.json())
-  //   .then(data => console.log(data.data.attributes.videos))
+  let title = "<%= @article.title %>"
+  // const keywords = '%20westworld%20robots'
+  fetch(`http://localhost:3000/relevant_content?keywords=${title}`)
+    .then(res => res.json())
+    .then(data => findRandomIDs(data))
 </script>
