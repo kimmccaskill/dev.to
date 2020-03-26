@@ -1,16 +1,74 @@
 <div class="youtube-videos">
-  <%= render "liquids/youtube", id: "rvfmPtkhqok", width: 766, height: 431 %>
-  <%= render "liquids/youtube", id: "-Mkp4oavz2M", width: 766, height: 431 %>
-  <%= render "liquids/youtube", id: "0Atk61qbLT0", width: 766, height: 431 %>
 </div>
+
 <script>
-  const options = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
+  let randomNumber1, randomNumber2, randomNumber3
+  const videoContainer = document.querySelector('.youtube-videos')
+
+  const data = {
+    data: {
+      id: null,
+      type: "relevant_content",
+      attributes: {
+        videos: [
+          {
+              id: "10WnvBk9sZc"
+          },
+          {
+              id: "oxoFVqetl1E"
+          },
+          {
+              id: "iyC-jQKz_1A"
+          },
+          {
+              id: "2KWd-5YHfiw"
+          },
+          {
+              id: "8SS2iOf-UgM"
+          },
+          {
+              id: "gYtvx_ay1Rw"
+          },
+          {
+              id: "3_yFOSPDrgY"
+          },
+          {
+              id: "fzG0Yxy0cZs"
+          },
+          {
+              id: "4emnBuT3vwQ"
+          },
+          {
+              id: "GfCC7u9kNC8"
+          }
+        ]
+      }
     }
   }
-  fetch(`http://localhost:3000/relevant_content?keywords=westworld`)
-    .then(res => res.json())
-    .then(data => console.log(data))
+
+  const findRandomIDs = () => {
+    let IDs = data.data.attributes.videos
+    let max = IDs.length
+    let randomNums = [Math.floor(Math.random() * (max)), Math.floor(Math.random() * (max)), Math.floor(Math.random() * (max))]
+    if (randomNums[0] === randomNums[1] || randomNums[1] === randomNums[2] || randomNums[2] === randomNums[0]) {
+      findRandomIDs()
+    } else {
+      return (
+        randomNums.map(number => {
+          let videoID = IDs[number].id
+          console.log(videoID)
+          videoContainer.innerHTML += `
+            <%= render "liquids/youtube", id: "${videoID}", width: 766, height: 431 %>
+          `
+        })
+      )
+    }
+  }
+  findRandomIDs()
+
+  // const title = "<%=@article.title %>"
+  // // const keywords = '%20westworld%20robots'
+  // fetch(`http://localhost:3000/relevant_content?keywords=${title}`)
+  //   .then(res => res.json())
+  //   .then(data => console.log(data.data.attributes.videos))
 </script>
