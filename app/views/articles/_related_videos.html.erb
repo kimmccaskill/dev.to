@@ -49,24 +49,37 @@
   const findRandomIDs = () => {
     let IDs = data.data.attributes.videos
     let max = IDs.length
-    
-    let randomNums = [Math.floor(Math.random() * (max)), Math.floor(Math.random() * (max)), Math.floor(Math.random() * (max))]
-    if (randomNums[0] === randomNums[1] || randomNums[1] === randomNums[2] || randomNums[2] === randomNums[0]) {
-      findRandomIDs()
+    if (max === 0) {
+      return videoContainer.innerHTML = `
+      <h2>Looks like we found no related videos. Sorry!!</h2>
+      `
+    }
+    if (max <= 3) {
+      return IDs.map(video => {
+        let videoID = video.id;
+        videoContainer.innerHTML += `
+              <%= render "liquids/youtube", id: "${videoID}", width: 766, height: 431 %>
+        `
+      })
     } else {
-      return (
-        randomNums.map(number => {
-          let videoID = IDs[number].id
-          videoContainer.innerHTML += `
-            <%= render "liquids/youtube", id: "${videoID}", width: 766, height: 431 %>
-          `
-        })
-      )
+      let randomNums = [Math.floor(Math.random() * (max)), Math.floor(Math.random() * (max)), Math.floor(Math.random() * (max))]
+      if (randomNums[0] === randomNums[1] || randomNums[1] === randomNums[2] || randomNums[2] === randomNums[0]) {
+        findRandomIDs()
+      } else {
+        return (
+          randomNums.map(number => {
+            let videoID = IDs[number].id
+            videoContainer.innerHTML += `
+              <%= render "liquids/youtube", id: "${videoID}", width: 766, height: 431 %>
+            `
+          })
+        )
+      }
     }
   }
   findRandomIDs()
 
-  // const title = "<%=@article.title %>"
+  // const title = "<%= @article.title %>"
   // // const keywords = '%20westworld%20robots'
   // fetch(`http://localhost:3000/relevant_content?keywords=${title}`)
   //   .then(res => res.json())
