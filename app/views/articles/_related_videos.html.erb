@@ -49,6 +49,7 @@
   const findRandomIDs = () => {
     let IDs = data.data.attributes.videos
     let max = IDs.length
+    
     let randomNums = [Math.floor(Math.random() * (max)), Math.floor(Math.random() * (max)), Math.floor(Math.random() * (max))]
     if (randomNums[0] === randomNums[1] || randomNums[1] === randomNums[2] || randomNums[2] === randomNums[0]) {
       findRandomIDs()
@@ -56,7 +57,6 @@
       return (
         randomNums.map(number => {
           let videoID = IDs[number].id
-          console.log(videoID)
           videoContainer.innerHTML += `
             <%= render "liquids/youtube", id: "${videoID}", width: 766, height: 431 %>
           `
