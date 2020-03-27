@@ -1,15 +1,16 @@
 class RelevantContentFacade
-  attr_reader :keywords, :id
+  attr_reader :id, :count, :keywords
 
-  def initialize(keywords)
+  def initialize(params)
     @id = nil
-    @keywords = keywords
+    @count = params[:count].to_i
+    @keywords = params[:keywords]
   end
 
   def videos
     youtube_service.videos.map do |data|
       YoutubeVideo.new(data)
-    end
+    end.sample(count)
   end
 
   private
