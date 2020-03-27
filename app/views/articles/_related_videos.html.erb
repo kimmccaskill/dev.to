@@ -55,7 +55,9 @@
       return videos.map(video => {
         let videoID = video.id;
         videoContainer.innerHTML += `
-              <%= render "liquids/youtube", id: "${videoID}", width: 766, height: 431 %>
+          <article class="video-article">
+            <%= render "liquids/youtube", id: "${videoID}", width: 766, height: 431 %>
+          </article>
         `
       })
     }
