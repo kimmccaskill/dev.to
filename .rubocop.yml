@@ -28,6 +28,10 @@ AllCops:
   ExtraDetails: true
   TargetRubyVersion: 2.6
 
+GlobalVars:
+  AllowedVariables:
+    - $REDIS
+
 Lint/AmbiguousBlockAssociation:
   Exclude:
     - "spec/**/*"

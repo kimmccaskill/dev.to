@@ -12,8 +12,14 @@ class YoutubeService
   private
 
   def get_json
-    @response ||= conn.get
-    JSON.parse(@response.body, symbolize_names: true)
+    if $REDIS.get(keywords)
+      json = eval($REDIS.get(keywords))
+    else
+      @response ||= conn.get
+      json = JSON.parse(@response.body, symbolize_names: true)
+      $REDIS.set(keywords, json, ex: 1.day)
+    end
+    json
   end
 
   def conn
