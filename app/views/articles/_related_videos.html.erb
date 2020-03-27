@@ -63,9 +63,7 @@
     }
   }
 
-  let title = "<%= @article.title %>"
-  // const keywords = '%20westworld%20robots'
-  fetch(`http://localhost:3000/relevant_content?keywords=<%= @article.title %>&count=3`)
+  fetch(`http://localhost:3000/relevant_content?keywords=<%= @article.title %>&tags=<%= @article.description_and_tags %>&count=3`)
     .then(res => res.json())
     .then(data => displayVideos(data))
 </script>
