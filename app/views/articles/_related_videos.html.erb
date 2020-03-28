@@ -2,48 +2,7 @@
 </div>
 
 <script>
-  // const data = {
-  //   data: {
-  //     id: null,
-  //     type: "relevant_content",
-  //     attributes: {
-  //       videos: [
-  //         {
-  //             id: "10WnvBk9sZc"
-  //         },
-  //         {
-  //             id: "oxoFVqetl1E"
-  //         },
-  //         {
-  //             id: "iyC-jQKz_1A"
-  //         },
-  //         {
-  //             id: "2KWd-5YHfiw"
-  //         },
-  //         {
-  //             id: "8SS2iOf-UgM"
-  //         },
-  //         {
-  //             id: "gYtvx_ay1Rw"
-  //         },
-  //         {
-  //             id: "3_yFOSPDrgY"
-  //         },
-  //         {
-  //             id: "fzG0Yxy0cZs"
-  //         },
-  //         {
-  //             id: "4emnBuT3vwQ"
-  //         },
-  //         {
-  //             id: "GfCC7u9kNC8"
-  //         }
-  //       ]
-  //     }
-  //   }
-  // }
-
-  const displayVideos = (data) => {
+function displayVideos(data) {
     let videoContainer = document.querySelector('.youtube-videos')
     let videos = data.data.attributes.videos
     let length = videos.length
@@ -63,7 +22,7 @@
     }
   }
 
-  fetch(`http://localhost:3000/relevant_content?keywords=<%= @article.title %>&tags=<%= @article.description_and_tags %>&count=3`)
+  fetch(`/relevant_content?keywords=<%= @article.title %>&tags=<%= @article.cached_tag_list %>&count=3`)
     .then(res => res.json())
     .then(data => displayVideos(data))
 </script>
