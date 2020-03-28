@@ -1,12 +1,15 @@
 require "rails_helper"
 
-RSpec.describe "Editing with an editor", type: :system, js: true do
+RSpec.describe "Editing with an editor", type: :system, js: true, vcr: true do
   let_it_be(:template) { file_fixture("article_published.txt").read }
   let_it_be(:user) { create(:user) }
   let_it_be(:article, reload: true) { create(:article, user: user, body_markdown: template) }
+  let(:start_time) { VCR.current_cassette&.originally_recorded_at || Time.current }
 
   before do
     sign_in user
+    $REDIS.flushall
+    Timecop.travel(start_time)
   end
 
   it "user previews their changes" do
