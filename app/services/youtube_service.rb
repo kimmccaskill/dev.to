@@ -7,14 +7,16 @@ class YoutubeService
   end
 
   def videos
-    list = $REDIS.get(keywords) ? eval($REDIS.get(keywords)) : get_json(keywords)
-    if list[:items].empty?
-      list = $REDIS.get(tags) ? eval($REDIS.get(tags)) : get_json(tags)
-    end
-    list
+    videos = get_from_cache_or_youtube(keywords)
+    videos = get_from_cache_or_youtube(tags) if videos[:items].empty?
+    videos
   end
 
   private
+
+  def get_from_cache_or_youtube(query)
+    $REDIS.get(query) ? eval($REDIS.get(query)) : get_json(query)
+  end
 
   def get_json(query)
     response = conn.get { |req| req.params[:q] = query }
@@ -31,7 +33,7 @@ class YoutubeService
       f.params[:type] = "video"
       f.params[:videoEmbeddable] = "true"
       f.params[:maxResults] = "50"
-      f.params[:publishedAfter] = (Time.now - 1.year).rfc3339
+      f.params[:publishedAfter] = (Time.current - 1.year).rfc3339
     end
   end
 end
