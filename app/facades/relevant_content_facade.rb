@@ -1,14 +1,14 @@
 class RelevantContentFacade
-  attr_reader :id, :count, :keywords
+  attr_reader :id, :count, :params
 
   def initialize(params)
     @id = nil
-    @count = params[:count].to_i
-    @keywords = params[:keywords]
+    @count = params[:count].to_i || 50
+    @params = params
   end
 
   def videos
-    youtube_service.videos.map do |data|
+    youtube_service.videos[:items].map do |data|
       YoutubeVideo.new(data)
     end.sample(count)
   end
@@ -16,6 +16,6 @@ class RelevantContentFacade
   private
 
   def youtube_service
-    @service = YoutubeService.new(keywords)
+    @service = YoutubeService.new(params)
   end
 end
