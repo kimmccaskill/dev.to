@@ -2,8 +2,6 @@
 </div>
 
 <script>
-  // let randomNumber1, randomNumber2, randomNumber3;
-
   // const data = {
   //   data: {
   //     id: null,
@@ -45,42 +43,27 @@
   //   }
   // }
 
-  const findRandomIDs = (data) => {
+  const displayVideos = (data) => {
     let videoContainer = document.querySelector('.youtube-videos')
-    let IDs = data.data.attributes.videos
-    let max = IDs.length
-    if (max === 0) {
+    let videos = data.data.attributes.videos
+    let length = videos.length
+    if (length === 0) {
       return videoContainer.innerHTML = `
       <h2>Looks like we found no related videos. Sorry!!</h2>
       `
-    }
-    if (max <= 3) {
-      return IDs.map(video => {
+    } else {
+      return videos.map(video => {
         let videoID = video.id;
         videoContainer.innerHTML += `
-              <%= render "liquids/youtube", id: "${videoID}", width: 766, height: 431 %>
+          <article class="video-article">
+            <%= render "liquids/youtube", id: "${videoID}", width: 766, height: 431 %>
+          </article>
         `
       })
-    } else {
-      let randomNums = [Math.floor(Math.random() * (max)), Math.floor(Math.random() * (max)), Math.floor(Math.random() * (max))]
-      if (randomNums[0] === randomNums[1] || randomNums[1] === randomNums[2] || randomNums[2] === randomNums[0]) {
-        findRandomIDs()
-      } else {
-        return (
-          randomNums.map(number => {
-            let videoID = IDs[number].id
-            videoContainer.innerHTML += `
-              <%= render "liquids/youtube", id: "${videoID}", width: 766, height: 431 %>
-            `
-          })
-        )
-      }
     }
   }
 
-  let title = "<%= @article.title %>"
-  // const keywords = '%20westworld%20robots'
-  fetch(`http://localhost:3000/relevant_content?keywords=${title}`)
+  fetch(`http://localhost:3000/relevant_content?keywords=<%= @article.title %>&tags=<%= @article.description_and_tags %>&count=3`)
     .then(res => res.json())
-    .then(data => findRandomIDs(data))
+    .then(data => displayVideos(data))
 </script>
