@@ -1,0 +1,131 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://www.googleapis.com/youtube/v3/search?key=<YOUTUBE_DATA_KEY>&maxResults=50&part=snippet&publishedAfter=2019-03-28T22:46:43Z&q=Little%20Hands%20Clapping1283&type=video&videoEmbeddable=true
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.17.3
+      X-Honeycomb-Trace:
+      - 1;dataset=,trace_id=8d6359a7-477e-40d8-831e-fbf946c33aec,parent_id=5682b368-379e-4713-8676-1857c31f26d3,context=e30=
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Expires:
+      - Sat, 28 Mar 2020 22:48:45 GMT
+      Date:
+      - Sat, 28 Mar 2020 22:48:45 GMT
+      Cache-Control:
+      - private, max-age=120, must-revalidate, no-transform
+      Etag:
+      - '"ksCrgYQhtFrXgbHAhi9Fo5t0C2I/bEp8TJtXaQPPaCi1eBoGyYvAK5k"'
+      Vary:
+      - Origin
+      - X-Origin
+      Content-Type:
+      - application/json; charset=UTF-8
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Content-Security-Policy:
+      - frame-ancestors 'self'
+      X-Xss-Protection:
+      - 1; mode=block
+      Server:
+      - GSE
+      Alt-Svc:
+      - quic=":443"; ma=2592000; v="46,43",h3-Q050=":443"; ma=2592000,h3-Q049=":443";
+        ma=2592000,h3-Q048=":443"; ma=2592000,h3-Q046=":443"; ma=2592000,h3-Q043=":443";
+        ma=2592000,h3-T050=":443"; ma=2592000
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        {
+         "kind": "youtube#searchListResponse",
+         "etag": "\"ksCrgYQhtFrXgbHAhi9Fo5t0C2I/bEp8TJtXaQPPaCi1eBoGyYvAK5k\"",
+         "regionCode": "US",
+         "pageInfo": {
+          "totalResults": 0,
+          "resultsPerPage": 50
+         },
+         "items": []
+        }
+    http_version: null
+  recorded_at: Sat, 28 Mar 2020 22:46:44 GMT
+- request:
+    method: get
+    uri: https://www.googleapis.com/youtube/v3/search?key=<YOUTUBE_DATA_KEY>&maxResults=50&part=snippet&publishedAfter=2019-03-28T22:46:44Z&q=chillwave,%20tofu,%20selvage,%20chicharrones&type=video&videoEmbeddable=true
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.17.3
+      X-Honeycomb-Trace:
+      - 1;dataset=,trace_id=8d6359a7-477e-40d8-831e-fbf946c33aec,parent_id=189ab8ae-08bf-4565-b1c5-37c63a114bb6,context=e30=
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Expires:
+      - Sat, 28 Mar 2020 22:48:45 GMT
+      Date:
+      - Sat, 28 Mar 2020 22:48:45 GMT
+      Cache-Control:
+      - private, max-age=120, must-revalidate, no-transform
+      Etag:
+      - '"ksCrgYQhtFrXgbHAhi9Fo5t0C2I/bEp8TJtXaQPPaCi1eBoGyYvAK5k"'
+      Vary:
+      - Origin
+      - X-Origin
+      Content-Type:
+      - application/json; charset=UTF-8
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      Content-Security-Policy:
+      - frame-ancestors 'self'
+      X-Xss-Protection:
+      - 1; mode=block
+      Server:
+      - GSE
+      Alt-Svc:
+      - quic=":443"; ma=2592000; v="46,43",h3-Q050=":443"; ma=2592000,h3-Q049=":443";
+        ma=2592000,h3-Q048=":443"; ma=2592000,h3-Q046=":443"; ma=2592000,h3-Q043=":443";
+        ma=2592000,h3-T050=":443"; ma=2592000
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        {
+         "kind": "youtube#searchListResponse",
+         "etag": "\"ksCrgYQhtFrXgbHAhi9Fo5t0C2I/bEp8TJtXaQPPaCi1eBoGyYvAK5k\"",
+         "regionCode": "US",
+         "pageInfo": {
+          "totalResults": 0,
+          "resultsPerPage": 50
+         },
+         "items": []
+        }
+    http_version: null
+  recorded_at: Sat, 28 Mar 2020 22:46:44 GMT
+recorded_with: VCR 5.1.0

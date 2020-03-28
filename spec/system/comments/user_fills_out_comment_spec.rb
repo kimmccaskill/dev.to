@@ -1,13 +1,16 @@
 require "rails_helper"
 
-RSpec.describe "Creating Comment", type: :system, js: true do
+RSpec.describe "Creating Comment", type: :system, js: true, vcr: true do
   let(:user) { create(:user) }
   let(:raw_comment) { Faker::Lorem.paragraph }
   # the article should be created before signing in
   let!(:article) { create(:article, user_id: user.id, show_comments: true) }
+  let(:start_time) { VCR.current_cassette&.originally_recorded_at || Time.current }
 
   before do
     sign_in user
+    $REDIS.flushall
+    Timecop.travel(start_time)
   end
 
   it "User fills out comment box normally" do

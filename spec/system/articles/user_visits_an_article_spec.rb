@@ -1,13 +1,16 @@
 require "rails_helper"
 
-RSpec.describe "Views an article", type: :system do
+RSpec.describe "Views an article", type: :system, vcr: true do
   let_it_be(:user) { create(:user) }
   let_it_be(:article, reload: true) { create(:article, :with_notification_subscription, user: user) }
   let(:timestamp) { "2019-03-04T10:00:00Z" }
+  let(:start_time) { VCR.current_cassette&.originally_recorded_at || Time.current }
 
   before do
     sign_in user
     visit "/#{user.username}/#{article.slug}"
+    $REDIS.flushall
+    Timecop.travel(start_time)
   end
 
   it "shows an article" do

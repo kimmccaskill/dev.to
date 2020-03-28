@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "Using the editor", type: :system do
+RSpec.describe "Using the editor", type: :system, vcr: true do
   let(:user) { create(:user) }
   let(:raw_text) { "../support/fixtures/sample_article_template_spec.txt" }
   # what are these
@@ -8,9 +8,12 @@ RSpec.describe "Using the editor", type: :system do
   let(:rich_dir) { "../support/fixtures/sample_rich_article.txt" }
   let(:template) { File.read(File.join(File.dirname(__FILE__), dir)) }
   let(:rich_template) { File.read(File.join(File.dirname(__FILE__), rich_dir)) }
+  let(:start_time) { VCR.current_cassette&.originally_recorded_at || Time.current }
 
   before do
     sign_in user
+    $REDIS.flushall
+    Timecop.travel(start_time)
   end
 
   def read_from_file(dir)

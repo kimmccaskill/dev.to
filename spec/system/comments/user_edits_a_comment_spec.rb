@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "Editing A Comment", type: :system, js: true do
+RSpec.describe "Editing A Comment", type: :system, js: true, vcr: true do
   let(:user) { create(:user) }
   let!(:article) { create(:article, show_comments: true) }
   let(:new_comment_text) { Faker::Lorem.paragraph }
@@ -10,9 +10,12 @@ RSpec.describe "Editing A Comment", type: :system, js: true do
            user: user,
            body_markdown: Faker::Lorem.paragraph)
   end
+  let(:start_time) { VCR.current_cassette&.originally_recorded_at || Time.current }
 
   before do
     sign_in user
+    $REDIS.flushall
+    Timecop.travel(start_time)
   end
 
   def assert_updated
