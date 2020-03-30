@@ -22,6 +22,8 @@ This is a project that explores an existing production code base.  We use the op
 <br>
 > As I read through articles it would be nice to see content from other sources related to the article that I am currently reading. For each article I would like to see three potentially related YouTube videos embedded at the bottom of the page.
 
+![](app/assets/images/2020-03-30_13-20-39.png)
+
 ### Learning Goals:
 
 - Learn and apply strategies for understanding how to analyze a large, existing code base
