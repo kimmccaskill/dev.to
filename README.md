@@ -1,5 +1,6 @@
+<div>
   <img alt="DEV" src="https://thepracticaldev.s3.amazonaws.com/i/ro3538by3b2fupbs63sr.png" width="500px">
-
+</div>
 ## Group Members
 
 - [Jomah Fangonilo](https://github.com/jfangonilo)
